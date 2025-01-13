@@ -1,18 +1,20 @@
 #!/usr/bin/env python3
 """script to generate a tutorial video using Manim and gTTS"""
-import os
+
 from gtts import gTTS
-#from manim import *
-from manim import Scene, Text, Write
 
 # Step 1: Voiceover Text for Each Slide
 voiceover_text = [
     """
-Welcome to this step-by-step tutorial on creating an Apache Airflow DAG for mapping ontology data from an API.
-In this session, we’ll use a sample dataset from early pharma research to demonstrate how you can automate your workflows.""",
+Welcome!
+This is a step-by-step tutorial on creating an Apache Airflow for mapping ontology data from an API.
+We’ll use sample data from early pharma research to demonstrate how you can automate your workflows.
+""",
     """
-Here’s what we’ll cover: First, we’ll outline the problem and solution.
-Then, we’ll set up the Airflow environment, define the tasks for data fetching and mapping, and finally, test and deploy the DAG.
+Here’s what we’ll cover. 
+First, we’ll outline the problem and solution.
+Then, we’ll set up the Airflow environment, define the tasks for data fetching and mapping.
+Finally, test and deploy the DAG.
 Let’s dive in!""",
     """
 Ontology mapping can be a time-consuming and error-prone task when done manually. 
@@ -49,38 +51,3 @@ for i, text in enumerate(voiceover_text):
     audio_file = f"slide_{i + 1}.mp3"
     tts.save(audio_file)
     audio_files.append(audio_file)
-
-
-# Step 3: Define Slides Using Manim
-class AirflowTutorial(Scene):
-    """script to generate a tutorial video using Manim and gTTS"""
-    def construct(self):
-        # Slide 1
-        slide_1 = Text("Setting Up an Airflow DAG for Ontology Data Mapping")
-        self.play(Write(slide_1))
-        self.wait(10)  # Match this to the length of audio
-        self.remove(slide_1)
-
-        # Slide 2
-        slide_2 = Text(
-            "What We’ll Cover\n- Problem and Solution\n- Setting up Airflow\n- Tasks for Data Fetching and Mapping\n- Testing and Deployment"
-        )
-        self.play(Write(slide_2))
-        self.wait(10)
-        self.remove(slide_2)
-
-        # Add more slides here, following the same format
-        # ...
-
-
-# Step 4: Combine Slides and Voiceover into Video
-os.system("manim -pql tutorial_script.py AirflowTutorial")
-
-# Step 5: Merge Audio with Video Using FFmpeg
-output_video = "airflow_tutorial.mp4"
-audio_input = "voiceover_audio.mp3"
-os.system(
-    f"ffmpeg -i {output_video} -i {audio_input} -c:v copy -c:a aac final_video.mp4"
-)
-
-print("Tutorial video generated successfully!")

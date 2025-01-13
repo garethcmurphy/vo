@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+"""script to combine audio and
+ video files using FFmpeg"""
 import os
 
 # Step 5: Merge Audio with Video Using FFmpeg
